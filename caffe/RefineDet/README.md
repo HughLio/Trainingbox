@@ -2,7 +2,7 @@
 ## training
 准备工作：
 + 环境中有编译好的RefinDet
-+ 以VOC的形式准备数据集，将lapmap.prototxt放在dataset目录下
++ 以VOC的形式准备数据集，将labelmap.prototxt放在dataset目录下
 + 建立数据集软连接 `ln -s /*/*/* train-dataset`
 + 准备预训练模型，放入training的目录下
 
@@ -54,7 +54,8 @@ def im_detect(net, im, targe_size):
 ```
 
 - scale:
-`config.py`
+`
+config.py`
 
 ```python
 # Pixel mean values (BGR order) as a (1, 1, 3) array
@@ -72,20 +73,10 @@ cp pascal_voc.py /opt/caffe/test/lib/datasets/pascal_voc.py
 cp refinedet_test.py /opt/caffe/test/refinedet_test.py
 ```
 
-## eval
-
-如果最后测试出现 IndexError: too many indices for array，那是因为你的测试数据中缺少了某些类别。请根据错误提示，找到对应的代码（$FRCN_ROOT/lib/datasets/voc_eval.py 第 148 行），前面加上一个 if 语句：
-```python
-if len(BB) != 0:
-BB = BB[sorted_ind, :]
-```
-
-
 ```bash
 nohup sh eval.sh &
 ```
-
-## parse log
+parse log
 生成ap的文件以及mAP文件
 ```bash
 sh parse_eval.sh nohup.out
