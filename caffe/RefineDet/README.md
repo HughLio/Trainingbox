@@ -1,18 +1,18 @@
 # RefineDet
 ## training
 准备工作：
-> 环境中有编译好的RefinDet
-> 以VOC的形式准备数据集，将lapmap.prototxt放在dataset目录下
-> 建立数据集软连接 `ln -s /*/*/* train-dataset`
-> 准备预训练模型，放入training的目录下
++ 环境中有编译好的RefinDet
++ 以VOC的形式准备数据集，将lapmap.prototxt放在dataset目录下
++ 建立数据集软连接 `ln -s /*/*/* train-dataset`
++ 准备预训练模型，放入training的目录下
 
 训练流程
-> `cd dataScript`
-> `./create_list.sh` 生成.txt,数据列表
-> `./create_data.sh` 生成lmdb格式数据集
-> 修改caffe路径，修改resize width 和 resize height
-> `cd training`
-> `./train.sh 2>&1 | tee train.log`
+1. `cd dataScript`
+2. `./create_list.sh` 生成.txt,数据列表
+3. `./create_data.sh` 生成lmdb格式数据集
+4. 修改caffe路径，修改resize width 和 resize height
+5. `cd training`
+6. `./train.sh 2>&1 | tee train.log`
 > 按需求调整预训练模型与训练参数
 
 ## evaluation
@@ -90,3 +90,6 @@ nohup sh eval.sh &
 ```bash
 sh parse_eval.sh nohup.out
 ```
+<p align="left">
+<img src="https://github.com/sfzhang15/RefineDet/blob/master/refinedet_results.jpg" alt="RefineDet results on multiple datasets" width="770px">
+</p>
