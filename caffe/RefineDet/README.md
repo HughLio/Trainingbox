@@ -90,6 +90,4 @@ nohup sh eval.sh &
 ```bash
 sh parse_eval.sh nohup.out
 ```
-<p align="left">
-<img src="https://github.com/sfzhang15/RefineDet/blob/master/refinedet_results.jpg" alt="RefineDet results on multiple datasets" width="770px">
-</p>
+[Reference/RefineDet]: (https://github.com/sfzhang15/RefineDet.git)
