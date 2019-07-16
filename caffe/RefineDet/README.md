@@ -44,7 +44,7 @@ self._classes = ('__background__', # always index 0
 Modify parameters
 
 - mean (for res18):
-`/opt/caffe/test/lib/fast_rcnn/test.py` im_detect  # function
+`test.py` im_detect  # function
 
 ```python
 def im_detect(net, im, targe_size):
@@ -54,7 +54,7 @@ def im_detect(net, im, targe_size):
 ```
 
 - scale:
-`/opt/caffe/test/lib/fast_rcnn/config.py`
+`config.py`
 
 ```python
 # Pixel mean values (BGR order) as a (1, 1, 3) array
@@ -90,4 +90,4 @@ nohup sh eval.sh &
 ```bash
 sh parse_eval.sh nohup.out
 ```
-[Reference/RefineDet]: (https://github.com/sfzhang15/RefineDet.git)
+<a href="https://github.com/sfzhang15/RefineDet.git" target="_blank">Reference/RefineDet</a>
