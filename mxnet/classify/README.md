@@ -3,6 +3,7 @@
 环境：
 mxnet vession >=1.4
 docopt， future，pyaml等
+
 准备数据：
 + `cd train`
 + `python make_recordio_lst.py /path/to/*.txt /path/to/*.lst`
