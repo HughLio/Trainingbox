@@ -1,36 +1,37 @@
-# Eval mAP
+# RefineDet
+## training
+准备工作：
+> 环境中有编译好的RefinDet
+> 以VOC的形式准备数据集，将lapmap.prototxt放在dataset目录下
+> 建立数据集软连接 `ln -s /*/*/* train-dataset`
+> 准备预训练模型，放入training的目录下
 
-## install
+训练流程
+> `cd dataScript`
+> `./create_list.sh` 生成.txt,数据列表
+> `./create_data.sh` 生成lmdb格式数据集
+> 修改caffe路径，修改resize width 和 resize height
+> `cd training`
+> `./train.sh 2>&1 | tee train.log`
+> 按需求调整预训练模型与训练参数
 
+## evaluation
+install
 ```bash
 cd /opt/caffe/test/lib
 make -j
 ```
-
-## create dataset link
-
-```bash
-ln -s /workspace/mnt/group/general-reg/zhuriheng/data/WA-DETECT-V1.3 VOC2007
-```
-
-## Modify parameters
+create dataset link
 
 ```bash
-cp voc_eval.py /opt/caffe/test/lib/datasets/voc_eval.py
-cp test.py /opt/caffe/test/lib/fast_rcnn/test.py
-cp config.py /opt/caffe/test/lib/fast_rcnn/config.py
-cp pascal_voc.py /opt/caffe/test/lib/datasets/pascal_voc.py
-cp refinedet_test.py /opt/caffe/test/refinedet_test.py
+ln -s /workspace/*/*/ VOC2007
 ```
+Modify dataset root
 
-
-
-### Modify dataset root
-
-修改 `test/lib/datasets/pascal_voc.py`中数据集的存放路径
+修改 `pascal_voc.py`中数据集的存放路径
 
 ```python
-self._devkit_path = os.environ['HOME'] + '/data/Object_Detection/pascal/VOCdevkit'
+self._devkit_path = os.environ['HOME'] + '/*/*/*/*'
 self._data_path = os.path.join(self._devkit_path, 'VOC' + self._year)
 self._classes = ('__background__', # always index 0
                 'aeroplane', 'bicycle', 'bird', 'boat',
@@ -40,8 +41,7 @@ self._classes = ('__background__', # always index 0
                 'sheep', 'sofa', 'train', 'tvmonitor')
 ```
 
-
-### Modify mean and scale
+Modify parameters
 
 - mean (for res18):
 `/opt/caffe/test/lib/fast_rcnn/test.py` im_detect  # function
@@ -62,6 +62,14 @@ def im_detect(net, im, targe_size):
 # they were trained with
 __C.PIXEL_MEANS = np.array([[[104, 117, 123]]])
 __C.PIXEL_MEANS = np.array([[[104, 117, 123]]])
+```
+
+```bash
+cp voc_eval.py /opt/caffe/test/lib/datasets/voc_eval.py
+cp test.py /opt/caffe/test/lib/fast_rcnn/test.py
+cp config.py /opt/caffe/test/lib/fast_rcnn/config.py
+cp pascal_voc.py /opt/caffe/test/lib/datasets/pascal_voc.py
+cp refinedet_test.py /opt/caffe/test/refinedet_test.py
 ```
 
 ## eval
